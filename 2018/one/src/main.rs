@@ -35,9 +35,6 @@ fn task_1(input: Vec<i64>) -> String {
 }
 
 fn task_2(input: Vec<i64>) -> String {
-    let mut double_input = input.clone();
-    double_input.append(input.clone().as_mut());
-
     let mut acc = 0;
     let mut known_values: HashMap<i64, ()> = HashMap::new();
     let mut output: Option<i64> = None;
