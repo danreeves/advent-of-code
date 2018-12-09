@@ -21,6 +21,7 @@ fn main() {
 
     let output = match task.as_ref() {
         "1" => task_1(input),
+        "2" => task_2(input),
         _ => String::from(""),
     };
 
@@ -43,6 +44,10 @@ fn task_1(input: Vec<&str>) -> String {
         });
 
     format!("{}", counts.0 * counts.1)
+}
+
+fn task_2(input: Vec<&str>) -> String {
+    format!("{}", "hi")
 }
 
 //                                (has_two, has_three)
