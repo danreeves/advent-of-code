@@ -47,7 +47,42 @@ fn task_1(input: Vec<&str>) -> String {
 }
 
 fn task_2(input: Vec<&str>) -> String {
-    format!("{}", "hi")
+    let mut matching: Option<(&str, &str)> = None;
+    let mut last_diff_index = 0;
+
+    for w1 in &input {
+        for w2 in &input {
+            if w1 == w2 {
+                continue;
+            }
+            let mut diff_chars = 0;
+            last_diff_index = 0;
+            let chars1 = w1.chars();
+            let chars2 = w2.chars();
+            let chars = chars1.zip(chars2);
+            for icc in chars.enumerate() {
+                let (i, cc) = icc;
+                let (c1, c2) = cc;
+                if c1 != c2 {
+                    diff_chars = diff_chars + 1;
+                    last_diff_index = i;
+                }
+            }
+            if diff_chars == 1 {
+                matching = Some((*w1, *w2));
+                break;
+            }
+        }
+        if matching.is_some() {
+            break;
+        }
+    }
+    if matching.is_some() {
+        let mut match1 = String::from(matching.unwrap().0);
+        match1.remove(last_diff_index);
+        return match1;
+    }
+    format!("")
 }
 
 //                                (has_two, has_three)
