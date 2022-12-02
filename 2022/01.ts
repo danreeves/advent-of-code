@@ -1,4 +1,4 @@
-const textInput = Deno.readTextFileSync("./day-one-input");
+const textInput = Deno.readTextFileSync("./01-input");
 
 function sumAndSort(data: string): number[] {
   return data.split("\n\n")
