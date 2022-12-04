@@ -51,12 +51,15 @@ function partTwo(data: string) {
       new Set(lines[i + 1]),
       new Set(lines[i + 2]),
     ];
+
     const uniqueChars = new Set(group.flatMap((x) => [...x]));
+
     for (const char of uniqueChars) {
       const count = group.reduce((sum, line) => {
         sum += line.has(char) ? 1 : 0;
         return sum;
       }, 0);
+
       if (count === 3) {
         sum += charToPriority(char);
       }
