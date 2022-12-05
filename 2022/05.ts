@@ -20,16 +20,21 @@ function parseStacks(input: string): string[][] {
   return stacks;
 }
 
+function getInstruction(
+  line: string,
+): [move: number, from: number, to: number] {
+  const [move, from, to] = line.match(/\d+/g)!.map((x) => parseInt(x, 10));
+  return [move, from - 1, to - 1];
+}
+
 function partOne(data: string) {
   const stacks = parseStacks(stacksInput);
   for (const line of data.trim().split("\n")) {
-    const matches = line.match(/\d+/g);
-    if (!matches) throw new Error("line parse error");
-    const [move, from, to] = matches.map((x) => parseInt(x, 10));
+    const [move, from, to] = getInstruction(line);
 
     for (let i = 0; i < move; i++) {
-      const top = stacks[from - 1].pop();
-      if (top) stacks[to - 1].push(top);
+      const top = stacks[from].pop();
+      if (top) stacks[to].push(top);
     }
   }
 
@@ -46,16 +51,14 @@ partOne(movesInput);
 function partTwo(data: string) {
   const stacks = parseStacks(stacksInput);
   for (const line of data.trim().split("\n")) {
-    const matches = line.match(/\d+/g);
-    if (!matches) throw new Error("line parse error");
-    const [move, from, to] = matches.map((x) => parseInt(x, 10));
+    const [move, from, to] = getInstruction(line);
 
     const carrying = [];
     for (let i = 0; i < move; i++) {
-      const top = stacks[from - 1].pop();
+      const top = stacks[from].pop();
       if (top) carrying.unshift(top);
     }
-    stacks[to - 1] = stacks[to - 1].concat(carrying);
+    stacks[to] = stacks[to].concat(carrying);
   }
 
   const output = stacks.reduce((str, stack) => {
