@@ -29,6 +29,7 @@ function getInstruction(
 
 function partOne(data: string) {
   const stacks = parseStacks(stacksInput);
+
   for (const line of data.trim().split("\n")) {
     const [move, from, to] = getInstruction(line);
 
@@ -38,10 +39,7 @@ function partOne(data: string) {
     }
   }
 
-  const output = stacks.reduce((str, stack) => {
-    str += stack.at(-1);
-    return str;
-  }, "");
+  const output = stacks.map((s) => s.at(-1)).join("");
 
   console.log("Part one:", output);
 }
@@ -50,6 +48,7 @@ partOne(movesInput);
 
 function partTwo(data: string) {
   const stacks = parseStacks(stacksInput);
+
   for (const line of data.trim().split("\n")) {
     const [move, from, to] = getInstruction(line);
 
@@ -61,10 +60,7 @@ function partTwo(data: string) {
     stacks[to] = stacks[to].concat(carrying);
   }
 
-  const output = stacks.reduce((str, stack) => {
-    str += stack.at(-1);
-    return str;
-  }, "");
+  const output = stacks.map((s) => s.at(-1)).join("");
 
   console.log("Part two:", output);
 }
