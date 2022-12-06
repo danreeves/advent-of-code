@@ -1,9 +1,9 @@
-const textInput = Deno.readTextFileSync("./06-input").trim();
+const textInput = Deno.readTextFileSync("./06-input").trim().split("");
 
-function taskOne(data: string, chunkLen = 4): number {
+function taskOne(data: string[], chunkLen = 4): number {
   for (let i = 0; i < data.length; i++) {
-    const chunk = new Set(data.slice(i, i + chunkLen).split(""));
-    if (Array.from(chunk).length === chunkLen) {
+    const chunk = new Set(data.slice(i, i + chunkLen));
+    if (chunk.size === chunkLen) {
       return i + chunkLen;
     }
   }
